@@ -2,7 +2,8 @@
 
 bootstrap:
 	python -m venv .venv
-	@echo "Bootstrap complete (offline-friendly)."
+	npm install --no-audit --no-fund --prefix apps/web
+	@echo "Bootstrap complete."
 
 verify:
 	bash scripts/verify.sh
