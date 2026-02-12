@@ -16,3 +16,11 @@ jobs:
           cache-dependency-path: apps/web/package-lock.json
       - run: make bootstrap
       - run: make verify
+      - name: Demo smoke (intentional timeout)
+        run: |
+          timeout 8s make demo > /tmp/demo.log 2>&1 &
+          DEMO_PID=$!
+          sleep 2
+          curl -f http://127.0.0.1:8000/healthz
+          curl -f http://127.0.0.1:3000/
+          wait $DEMO_PID || true

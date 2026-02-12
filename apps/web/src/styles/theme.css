@@ -3208,3 +3208,31 @@ main {padding:16px; overflow:auto;}
 .token-3197 { --token-value-3197: 3197; margin-left:5px; padding-right:2px; border-radius:2px; }
 .token-3198 { --token-value-3198: 3198; margin-left:6px; padding-right:3px; border-radius:3px; }
 .token-3199 { --token-value-3199: 3199; margin-left:0px; padding-right:4px; border-radius:4px; }
+html, body, #root {
+  height: 100%;
+}
+
+.boot-panel {
+  border: 1px solid #2b4c85;
+  background: #0f1f38;
+  border-radius: 10px;
+  padding: 12px;
+  margin-bottom: 16px;
+}
+
+.widget-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.metric-value {
+  font-size: 1.5rem;
+  margin: 8px 0;
+}
+
+.diagnostics ul {
+  margin: 0;
+  padding-left: 18px;
+}
