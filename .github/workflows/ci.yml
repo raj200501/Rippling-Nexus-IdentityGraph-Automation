@@ -8,19 +8,21 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-          cache: 'pip'
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
-          cache-dependency-path: apps/web/package-lock.json
       - run: make bootstrap
       - run: make verify
-      - name: Demo smoke (intentional timeout)
+      - name: Demo smoke
         run: |
-          timeout 8s make demo > /tmp/demo.log 2>&1 &
+          make demo > /tmp/demo.log 2>&1 &
           DEMO_PID=$!
-          sleep 2
+          for i in {1..20}; do
+            if curl -sf http://127.0.0.1:8000/healthz >/dev/null; then
+              break
+            fi
+            sleep 1
+          done
           curl -f http://127.0.0.1:8000/healthz
-          curl -f http://127.0.0.1:3000/
-          wait $DEMO_PID || true
+          curl -f http://127.0.0.1:3000
+          kill $DEMO_PID || true
