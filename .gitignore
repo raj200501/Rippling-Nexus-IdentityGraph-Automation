@@ -1,0 +1,6 @@
+.venv/
+.nexus/
+__pycache__/
+*.pyc
+*.db
+apps/web/node_modules/
